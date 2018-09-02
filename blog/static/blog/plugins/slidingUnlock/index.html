@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <title>滑动解锁</title>
+    <style>
+        #slide_box {
+            width: 70%;
+            height: 42px;
+            text-align: center;
+            line-height: 42px;
+            font-size: 14px;
+            color: #717171;
+            background-color: #e8e8e8;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        #slide_xbox {
+            width: 50px;
+            height: 42px;
+            text-align: center;
+            line-height: 42px;
+            font-size: 16px;
+            color: #fff;
+            position: absolute;
+            background: #35b34a;
+        }
+
+        #btn {
+            cursor: pointer;
+            width: 50px;
+            height: 42px;
+            background-color: #fff;
+            float: right;
+            -webkit-box-shadow: 0px 0px 15px 0px #ddd;
+            -moz-box-shadow: 0px 0px 15px 0px #ddd;
+            box-shadow: 0px 0px 15px 0px #ddd;
+            color: #8a8c97;
+
+        }
+
+        #btn > .iconfont {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="slide_box">
+    <div id="slide_xbox">
+        <div id="btn">
+            <i class="iconfont icon-double-right"></i>
+            <img src="" alt="">
+        </div>
+    </div>
+    请按住滑块，拖动到最右边
+</div>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    var locked;
+    window.onload = function () {
+        slide();
+
+    }
+    window.onresize = function () {
+        if(locked==true){
+            var boxWidth = $('#slide_box').width();
+            $('#slide_xbox').width(boxWidth);
+        }else{
+            slide();
+        }
+    }
+    //滑动解锁移动
+    function slide() {
+        var slideBox = $('#slide_box')[0];
+        var slideXbox = $('#slide_xbox')[0];
+        var btn = $('#btn')[0];
+        var slideBoxWidth = slideBox.offsetWidth;
+        var btnWidth = btn.offsetWidth;
+        //pc端
+        btn.ondragstart = function () {
+            return false;
+        };
+        btn.onselectstart = function () {
+            return false;
+        };
+        btn.onmousedown = function (e) {
+            var disX = e.clientX - btn.offsetLeft;
+            var a = e.clientX ;
+            var b= btn.offsetLeft;
+            document.onmousemove = function (e) {
+                var objX = e.clientX - disX + btnWidth;
+                if (objX < btnWidth) {
+                    objX = btnWidth
+                }
+                if (objX > slideBoxWidth) {
+                    objX = slideBoxWidth
+                }
+                $('#slide_xbox').width(objX + 'px');
+            };
+            document.onmouseup = function (e) {
+                var objX = e.clientX - disX + btnWidth;
+                if (objX < slideBoxWidth) {
+                    objX = btnWidth;
+                } else {
+                    objX = slideBoxWidth;
+                    locked = true;
+                    $('#slide_xbox').html('验证通过<div id="btn"><i class="iconfont icon-xuanzhong" style="color: #35b34a;"></i></div>');
+                }
+                $('#slide_xbox').width(objX + 'px');
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        };
+    }
+</script>
+</body>
+</html>

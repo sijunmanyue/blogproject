@@ -1,0 +1,124 @@
+{% extends 'blog/site.html' %}
+{% load static %}
+{% block title %}文章列表页{% endblock %}
+{% block cssPlugins %}
+      <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.css' %}">
+{% endblock %}
+{% block main %}
+      <!-- ========== MAIN ========== -->
+  <main id="content" role="main">
+    <!-- Blog Classic Section -->
+    <div class="container u-space-4-top u-space-5-top--md u-space-4-top--lg u-space-3-bottom">
+      <!-- Title -->
+      <div class="mb-9">
+          <h3 class="font-weight-normal">共搜到{{ articles | length }}篇文章 {% if tag %}
+              <span class="text-primary font-weight-bold">{{ tag }}</span>
+          {% elif cate %}<span class="text-primary font-weight-bold">{{ tag }}</span>{% endif %}</h3>
+        {% if ppl %}<h5 class="font-weight-normal">
+            分词策略 - {% for word in ppl %}&nbsp;<span class="text-primary font-weight-bold"><a href="/blog/articles/key/{{ word }}">{{ word }}</a></span>{% endfor%}
+          </h5>
+        {% endif %}
+      </div>
+      <!-- End Title -->
+
+      <!-- Articles List -->
+      <div class="row">
+        {% for article in articles %}
+            <div class="col-sm-6 mb-7">
+              <!-- Article -->
+              <article>
+                <div class="mb-5">
+                    {% load highlighting %}
+                    <a href="{% url 'blog:article-detail' article.id %}"><img class="img-fluid w-100 rounded" src="{{ article.picture.url }}" alt=""></a>
+                </div>
+                <small class="d-block text-secondary mb-1">{{ article.creationTime|date:'M d, Y'}}</small>
+                <h2 class="h5">
+                  <a class="text-overflow-ellipsis" title="{{ article.title }}" href="{% url 'blog:article-detail' article.id %}">{% if ppl %}
+                  {{ article.title | wrap_replace:ppl }}
+                  {% else %}{{ article.title }}{% endif %}</a>
+                </h2>
+                <p>{% if ppl %}
+                {{ article.summary|wrap_replace:ppl }}{% else %}
+                    {{ article.summary }}
+                {% endif %}</p>
+              </article>
+              <!-- End Article -->
+            </div>
+        {% endfor %}
+
+      </div>
+      <!-- End News Classic -->
+
+      <div class="u-space-2-bottom"></div>
+        {% load pagination %}
+        {% pagination articles %}
+    </div>
+    <!-- Blog Classic Section -->
+
+    {% include 'blog/includes/leave_message.html' with theme='primary' %}
+
+
+  </main>
+  <!-- ========== END MAIN ========== -->
+{% endblock %}
+
+{% block jsPlugins %}
+    <!-- JS Implementing Plugins -->
+  <script src="{% static 'blog/js/hs.megamenu.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'blog/js/my_site/login.js' %}"></script>
+{% endblock %}
+
+{% block pageScripts %}
+      <!-- JS Plugins Init. -->
+  <script>
+    $(window).on('load', function () {
+      // initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        pageContainer: $('.container'),
+        breakpoint: 768,
+        hideTimeOut: 0
+      });
+    });
+
+    $(document).on('ready', function () {
+      // initialization of header
+      $.HSCore.components.HSHeader.init($('#header'));
+
+      // initialization of unfold component
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        afterOpen: function () {
+          $(this).find('input[type="search"]').focus();
+        }
+      });
+
+      // initialization of malihu scrollbar
+      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+      // initialization of show animations
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+      // initialization of form validation
+      $.HSCore.components.HSValidation.init('.js-validate', {
+        rules: {
+          confirmPassword: {
+            equalTo: '#password'
+          }
+        }
+      });
+
+      // initialization of forms
+      $.HSCore.helpers.HSFocusState.init();
+
+      // initialization of go to
+      $.HSCore.components.HSGoTo.init('.js-go-to');
+    });
+  </script>
+
+{% endblock %}

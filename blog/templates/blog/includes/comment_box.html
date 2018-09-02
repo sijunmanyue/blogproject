@@ -1,0 +1,15 @@
+<h4 class="h6 mb-0">欢迎评论</h4>
+<hr class="mt-2 mb-6">
+<div class="comment-box">
+  <textarea class="reply mb-2" rows="5" style="width: 100%;" placeholder="请输入您想说的话..."></textarea>
+  <div class="text-right btn-group-sm">
+      <button type="button" class="btn-cancel btn btn-outline-secondary" style="line-height: .5rem;">取消</button>&nbsp;
+      <button type="button" class="btn-reply {% if not request.user.is_anonymous %}active{% endif %} btn btn-outline-primary" style="line-height: .5rem;" {% if request.user.is_anonymous %}
+          role="button" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false"
+             data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent"
+             data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
+             data-unfold-duration="500"
+              onclick="layer.msg('请先登录！')"
+          {% endif %}>回复</button>
+  </div>
+</div>

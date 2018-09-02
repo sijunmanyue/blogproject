@@ -1,0 +1,43 @@
+<!-- Articles Carousel -->
+<div class="bg-primary">
+  <div class="container u-space-1">
+    <div class="js-slick-carousel u-slick u-slick--gutters-3"
+         data-slides-show="3"
+         data-slides-scroll="1"
+         data-autoplay="true"
+         data-speed="5000"
+         data-responsive='[{
+           "breakpoint": 992,
+           "settings": {
+             "slidesToShow": 2
+           }
+         }, {
+           "breakpoint": 768,
+           "settings": {
+             "slidesToShow": 1
+           }
+         }]'>
+       {% for article in articles %}
+           <div class="js-slide">
+            <!-- Article -->
+            <div class="u-blog-thumb-v1">
+              <a class="media" href="{% url 'blog:article-detail' article.id %}">
+                <span class="d-flex u-blog-thumb-v1__img-wrapper mr-3">
+                  <span class="u-blog-thumb-v1__img-wrapper">
+                    <img class="img-fluid u-blog-thumb-v1__img" src="{{ article.picture.url }}" alt=""/>
+                  </span>
+                </span>
+                <span class="media-body">
+                  <span class="d-block h6 text-white mb-1">{{ article.title }}</span>
+                  <small class="d-block u-text-light text-overflow-ellipsis">{{ article.summary }}</small>
+                </span>
+              </a>
+            </div>
+            <!-- End Article -->
+           </div>
+       {% endfor %}
+       
+    </div>
+  </div>
+</div>
+<!-- End Articles Carousel -->

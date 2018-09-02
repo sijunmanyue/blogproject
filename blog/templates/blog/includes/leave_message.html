@@ -1,0 +1,91 @@
+    <!-- Barrage Sections -->
+    {% load static %}
+    {% with bg_color_primary='u-gradient-half-primary-v1' bg_color_warning='u-gradient-half-warning-v1' %}
+    <div id="leave-message" class="position-relative {% ifequal theme 'primary' %}{{ bg_color_primary }}{% else %}{{ bg_color_warning }}{% endifequal %} u-space-3">
+     {% endwith %}
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-md-9 col-lg-7 col-xl-6 offset-xl-2">
+            <!-- Title -->
+            <div class="text-center mb-4">
+              <h2 class="h1 text-white"><span class="font-weight-bold">：）</span> 有什么想说的 ？</h2>
+              <p class="lead u-text-light">留下你想说的话，也许会在首页的滚动条中显示.</p>
+            </div>
+            <!-- End Title -->
+
+            <!-- Form -->
+            <form id="leaveMessageForm" class="js-validate js-form-message mb-2" novalidate="novalidate">
+              <div class="js-focus-state input-group input-group-lg u-form u-form--lg u-form--white-brd">
+                <input type="text" id="message" class="form-control u-form__input" name="message" placeholder="输入你想说的话" aria-label="输入你想说的话">
+                <div class="input-group-append u-form__append">
+                  {% with button_color_primary='btn-warning' button_color_warning='btn-primary' %}
+                      <button type="button" class="btn {% ifequal theme 'primary' %}{{ button_color_primary }}{% else %}{{ button_color_warning }}{% endifequal %} u-btn-wide">发送</button>
+                  {% endwith %}
+                </div>
+              </div>
+            </form>
+            <!-- End Form -->
+          </div>
+
+          <div class="col-xl-2 d-none d-xl-inline-block mt-auto mb-7">
+            <div class="position-relative p-3">
+
+              <!-- SVG Shape -->
+              <figure class="position-absolute-top-0">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 254 204.2" style="enable-background:new 0 0 254 204.2;" xml:space="preserve">
+                  <path class="u-fill-none u-stroke-white" opacity=".5" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="10" d="M0.5,171V6.5c0-3.3,3.3-6,7.3-6h238.6c3.9,0,7.1,2.6,7.1,5.8v164c0,3.6-3.5,6.5-7.9,6.5H61.4
+                    c-3,0-5.6,1.4-6.8,3.7l-22,22.6l-0.2-22.4c-1.1-2.3-3.8-3.9-6.8-3.9H7.6C3.7,176.8,0.5,174.2,0.5,171z"></path>
+                </svg>
+              </figure>
+              <!-- End SVG Shape -->
+                <p class="small u-text-light mb-0">聪明人从不说废话，尽量不要超过30个汉字.</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG Phone Mockup -->
+      <div class="d-none d-lg-block u-devices-v2__phone u-devices-v2__phone--left-position">
+        <figure class="w-75 u-devices-v2__phone-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 317.5 665" style="enable-background:new 0 0 317.5 665;" xml:space="preserve">
+            <path class="u-fill-white" d="M263,666H54c-29.7,0-54-24.3-54-54V55C0,25.3,24.3,1,54,1h209c29.7,0,54,24.3,54,54v557
+              C317,641.7,292.7,666,263,666z"></path>
+            <circle class="u-fill-gray-75" cx="159.5" cy="619.5" r="25.5"></circle>
+            <path class="u-fill-gray-75" fill-rule="evenodd" clip-rule="evenodd" d="M180,52h-42c-2.2,0-4-1.8-4-4v0c0-2.2,1.8-4,4-4h42c2.2,0,4,1.8,4,4v0C184,50.2,182.2,52,180,52z"></path>
+            <g>
+              <defs>
+                <rect id="phoneFrameID1" x="19.4" y="81.3" width="280" height="500"></rect>
+              </defs>
+              <clippath id="phoneFrameID2">
+                <use xlink:href="#phoneFrameID1" style="overflow:visible;"></use>
+              </clippath>
+              <g style="clip-path:url(#phoneFrameID2);">
+                <!-- Apply your (282px width to 500px height) image here -->
+                <image style="overflow:visible;" width="282" height="500" xlink:href="{% static 'blog/images/282x500/img3.jpg' %}" transform="matrix(1 0 0 1 18 81)"></image>
+              </g>
+              <use class="u-fill-none u-stroke-light-blue-125" xlink:href="#phoneFrameID1" stroke-miterlimit="10" style="overflow: visible;"></use>
+            </g>
+          </svg>
+        </figure>
+      </div>
+      <!-- End SVG Phone Mockup -->
+    </div>
+    <!-- End Barrage Section -->
+
+{% ifequal theme 'primary' %}
+        <!-- SVG Background -->
+    <figure class="position-absolute-bottom-0 z-index-2">
+      <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="140px" viewBox="20 -20 300 100" style="margin-bottom: -8px;" xml:space="preserve">
+        <path class="u-fill-white" opacity="0.4" d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+    c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"></path>
+        <path class="u-fill-white" opacity="0.4" d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+    c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"></path>
+        <path class="u-fill-white" opacity="0" d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+    H42.401L43.415,98.342z"></path>
+        <path class="u-fill-white" d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+    c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"></path>
+      </svg>
+    </figure>
+    <!-- End SVG Background Section -->
+{% endifequal %}

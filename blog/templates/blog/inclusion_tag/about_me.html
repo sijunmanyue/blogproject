@@ -1,0 +1,11 @@
+{% load static %}
+<div class="text-center mb-5" id="aboutMe" style="position: relative;">
+    <div style="height: 150px; background-size:cover; background: url('{% static 'blog/images/1920x1080/iceland.jpg' %}')"></div>
+    <img src="/media/{{ about.headPortrait }}" style="max-width: 100px;margin-top: -70px;
+                margin-bottom: 5px;border: 3px solid #fff;border-radius: 100%;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);" alt="">
+    <h3 class="h5">{{ about.nameEn }}</h3>
+    <p class="mb-md-0">{{ about.job }}</p>
+    <p class="mb-md-0">{{ about.introduction }}</p>
+    <p class="mb-md-0">文章数{{ count }}篇</p>
+</div>
+<div class="my-7"></div>

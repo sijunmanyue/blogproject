@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html -->
+<html lang="en">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <!-- Title -->
+      <title>{% block title %}{% endblock %}</title>
+      <!-- Required Meta Tags Always Come First -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+       {% load static %}
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="{% static 'blog/images/svg/favicon.png' %}">
+      <!-- Google Fonts -->
+      <link href="{% static 'blog/css/google.font.css' %}" rel="stylesheet">
+      <!-- CSS Global Compulsory -->
+      <link rel="stylesheet" href="{% static 'blog/css/bootstrap.css' %}">
+      <!-- CSS Implementing Plugins -->
+      {% block cssPlugins %}{% endblock %}
+
+
+
+      <!-- CSS Front Template -->
+      <link rel="stylesheet" href="{% static 'blog/css/front.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/plugins/slidingUnlock/font/iconfont.css' %}">
+</head>
+<body>
+  {% block container %}{% endblock %}
+  {% include 'blog/includes/aside.html' %}
+
+  <!-- JS Global Compulsory -->
+  <script src="{% static 'blog/js/jquery.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'blog/js/popper.min.js' %}"></script>
+  <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.mousewheel.min.js' %}"></script>
+  <script src="{% static 'blog/plugins/layer/layer.js' %}"></script>
+
+  {% block jsPlugins %}
+  {% endblock %}
+
+  <!-- JS Front -->
+  <script src="{% static 'blog/js/hs.core.js' %}"></script>
+  <script src="{% static 'blog/js/hs.header.js' %}"></script>
+  <script src="{% static 'blog/js/hs.unfold.js' %}"></script>
+  <script src="{% static 'blog/js/hs.malihu-scrollbar.js' %}"></script>
+  <script src="{% static 'blog/js/hs.validation.js' %}"></script>
+  <script src="{% static 'blog/js/hs.focus-state.js' %}"></script>
+  <script src="{% static 'blog/js/hs.show-animation.js' %}"></script>
+  <script src="{% static 'blog/js/hs.sticky-block.js' %}"></script>
+  <script src="{% static 'blog/js/hs.instagram.js' %}"></script>
+  <script src="{% static 'blog/js/hs.scroll-effect.js' %}"></script>
+  <script src="{% static 'blog/js/hs.slick-carousel.js' %}"></script>
+  <script src="{% static 'blog/js/hs.go-to.js' %}"></script>
+  <script src="{% static 'blog/js/jquery-1.4.1.cookie.js' %}"></script>
+  <script src="{% static 'blog/js/my_site/aside.js' %}"></script>
+  <script src="{% static 'blog/js/my_site/leave_message.js' %}"></script>
+  <script src="{% static 'blog/js/my_site/slide.box.js' %}"></script>
+  <!-- JS Page -->
+  <script id="init-script">
+      $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+      });
+  </script>
+  {% block pageScripts %}{% endblock %}
+</body>

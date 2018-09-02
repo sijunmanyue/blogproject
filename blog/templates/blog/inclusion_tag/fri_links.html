@@ -1,0 +1,10 @@
+<div class="mb-5">
+    <h3 class="h5 text-primary font-weight-bold mb-4">{{ title }}</h3>
+    <ul class="list-inline">
+        {% for link in links %}
+          <li class="list-inline-item pb-3">
+            <a class="u-label u-label--xs u-label--secondary" href="{{ link.url }}">{{ link.description }}</a>
+          </li>
+        {% endfor %}
+    </ul>
+</div>

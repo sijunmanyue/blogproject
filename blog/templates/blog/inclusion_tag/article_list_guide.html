@@ -1,0 +1,22 @@
+<div class="mb5 article_list_guide">
+    <h3 class="h5 text-primary font-weight-bold mb-4">{{ title }}</h3>
+    <!-- Article -->
+    {% for article in articles %}
+        <article class="mb-5">
+          <div class="media mb-1">
+            <div class="d-flex mr-3" style="overflow:hidden;height: 44px;width: 44px;border-radius: 0.25rem !important;">
+              <img class="" style="height: 44px;" src="{{ article.picture.url }}" alt="Image Description">
+            </div>
+            <div class="media-body">
+              <h4 class="h6 font-weight-normal mb-0">
+                <a href="/blog/article/{{ article.id }}">
+                  {{ article.title }}
+                </a>
+              </h4>
+            </div>
+          </div>
+        </article>
+    {% endfor %}
+    <!-- End Article -->
+</div>
+<div class="my-7"></div>

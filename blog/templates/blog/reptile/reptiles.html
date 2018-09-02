@@ -1,0 +1,246 @@
+{% extends 'blog/site.html' %}
+{% load static %}
+{% load smart_timesince %}
+{% block title %}爬虫页面{% endblock %}
+{% block cssPlugins %}
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/dzsparallaxer.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/plugins/prism/prism.css' %}">
+{% endblock %}
+{% block main %}
+      <!-- ========== MAIN ========== -->
+  <main id="content" role="main">
+    <!-- Blog List Section -->
+    <div class="container u-space-4-top u-space-5-top--md u-space-4-top--lg u-space-3-bottom">
+      <!-- Title -->
+      <div class="w-lg-80 mx-auto mb-9">
+        <h2 class="font-weight-normal">爬虫 - 共发现<span class="text-primary font-weight-bold">{{ reptiles|length }}</span>条记录</h2>
+      </div>
+      <!-- End Title -->
+
+      <div class="w-lg-80 mx-auto">
+        {% for reptile in reptiles %}
+            <!-- Blog List News -->
+            {% if forloop.counter|divisibleby:4%}
+                <!-- Blog Card -->
+                <article class="bg-primary rounded text-center shadow-primary-sm position-relative mb-7">
+                  <a class="d-block u-space-2 px-7" href="{% url 'blog:article-detail' reptile.id %}">
+                    <!-- SVG Quote -->
+                    <figure class="mx-auto mb-3" style="width: 35px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 8 8" style="enable-background:new 0 0 8 8;" xml:space="preserve">
+                        <path class="u-fill-white" opacity=".7" d="M3,1.3C2,1.7,1.2,2.7,1.2,3.6c0,0.2,0,0.4,0.1,0.5c0.2-0.2,0.5-0.3,0.9-0.3c0.8,0,1.5,0.6,1.5,1.5c0,0.9-0.7,1.5-1.5,1.5
+                          C1.4,6.9,1,6.6,0.7,6.1C0.4,5.6,0.3,4.9,0.3,4.5c0-1.6,0.8-2.9,2.5-3.7L3,1.3z M7.1,1.3c-1,0.4-1.8,1.4-1.8,2.3
+                          c0,0.2,0,0.4,0.1,0.5c0.2-0.2,0.5-0.3,0.9-0.3c0.8,0,1.5,0.6,1.5,1.5c0,0.9-0.7,1.5-1.5,1.5c-0.7,0-1.1-0.3-1.4-0.8
+                          C4.4,5.6,4.4,4.9,4.4,4.5c0-1.6,0.8-2.9,2.5-3.7L7.1,1.3z"></path>
+                      </svg>
+                    </figure>
+                    <!-- End SVG Quote -->
+
+                    <h3 class="h4 text-white mb-4">{{ reptile.title }}</h3>
+                    <small class="d-block u-text-light mb-1">{{ reptile.author.userinfo.nickname }}</small>
+                  </a>
+                </article>
+                <!-- End Blog Card -->
+            {% else %}
+                <article class="row mb-7">
+                  <div class="col-sm-5 mb-5 mb-sm-0">
+                    <!-- Image -->
+                    <img class="img-fluid w-100 rounded" src="{{ reptile.picture.url }}" alt="Image Description">
+                    <!-- End Image -->
+                  </div>
+
+                  <div class="col-sm-7">
+                    <!-- Info -->
+                    <div class="pt-1 pr-4">
+                      <small class="d-block text-muted mb-3">{{ reptile.creationTime|smart_timesince }}</small>
+                      <div class="mb-7">
+                        <h2 class="h5">
+                          <a href="{% url 'blog:article-detail' reptile.id %}">{{ reptile.title }}</a>
+                        </h2>
+                        <p>{{ reptile.summary }}</p>
+                      </div>
+                      <small class="d-block text-secondary">by <a class="text-dark font-weight-bold" href="">{{ reptile.author.userinfo.nickname }}</a></small>
+                    </div>
+                    <!-- End Info -->
+                  </div>
+                </article>
+            {% endif %}
+            <!-- End Blog News -->
+        {% endfor %}
+
+        <div class="u-space-2-bottom"></div>
+
+{#        <!-- Pagination -->#}
+{#        <nav aria-label="Page navigation">#}
+{#          <ul class="pagination mb-0">#}
+{#            <li class="page-item ml-0">#}
+{#              <a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#" aria-label="Previous">#}
+{#                <span aria-hidden="true">«</span>#}
+{#                <span class="sr-only">Previous</span>#}
+{#              </a>#}
+{#            </li>#}
+{#            <li class="page-item active"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">1</a></li>#}
+{#            <li class="page-item"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">2</a></li>#}
+{#            <li class="page-item disabled"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">...</a></li>#}
+{#            <li class="page-item"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">12</a></li>#}
+{#            <li class="page-item">#}
+{#              <a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#" aria-label="Next">#}
+{#                <span aria-hidden="true">»</span>#}
+{#                <span class="sr-only">Next</span>#}
+{#              </a>#}
+{#            </li>#}
+{#          </ul>#}
+{#        </nav>#}
+{#        <!-- End Pagination -->#}
+      </div>
+    </div>
+    <!-- End Blog List Section -->
+
+    <!-- Sticky Block End Point -->
+    <div id="stickyBlockEndPoint"></div>
+
+    <!-- Subscribe Section -->
+    <div class="position-relative u-gradient-half-primary-v1 u-space-3-top u-space-4-bottom">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-md-9 col-lg-7 col-xl-6 offset-xl-2">
+            <!-- Title -->
+            <div class="text-center mb-4">
+              <span class="u-label u-label--sm u-label--white mb-2">Subscribe</span>
+              <h2 class="h1 text-white"><span class="font-weight-bold">Stay</span> in the know</h2>
+              <p class="lead u-text-light">Get special offers on the latest developments from Front.</p>
+            </div>
+            <!-- End Title -->
+
+            <!-- Form -->
+            <form class="js-validate js-form-message mb-2" novalidate="novalidate">
+              <div class="js-focus-state input-group input-group-lg u-form u-form--lg u-form--white-brd">
+                <input type="email" class="form-control u-form__input" name="email" required="" placeholder="Enter your email address" aria-label="Enter your email address" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                <div class="input-group-append u-form__append">
+                  <button type="submit" class="btn btn-warning u-btn-wide">Join Front</button>
+                </div>
+              </div>
+            </form>
+            <!-- End Form -->
+
+            <!-- Info -->
+            <div class="d-block d-xl-none">
+              <p class="small u-text-light mb-0">Be the lucky user to earn <span class="text-white font-weight-bold">$1000</span> bonus now!</p>
+            </div>
+            <!-- End Info -->
+          </div>
+
+          <div class="col-xl-2 d-none d-xl-inline-block mt-auto mb-7">
+            <div class="position-relative p-3">
+              <p class="small u-text-light mb-0">Be the lucky user to earn <span class="text-white font-weight-bold">$1000</span> bonus now!</p>
+
+              <!-- SVG Shape -->
+              <figure class="position-absolute-top-0">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 254 204.2" style="enable-background:new 0 0 254 204.2;" xml:space="preserve">
+                  <path class="u-fill-none u-stroke-white" opacity=".5" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="10" d="M0.5,171V6.5c0-3.3,3.3-6,7.3-6h238.6c3.9,0,7.1,2.6,7.1,5.8v164c0,3.6-3.5,6.5-7.9,6.5H61.4
+                    c-3,0-5.6,1.4-6.8,3.7l-22,22.6l-0.2-22.4c-1.1-2.3-3.8-3.9-6.8-3.9H7.6C3.7,176.8,0.5,174.2,0.5,171z"></path>
+                </svg>
+              </figure>
+              <!-- End SVG Shape -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG Phone Mockup -->
+      <div class="d-none d-lg-block u-devices-v2__phone u-devices-v2__phone--left-position">
+        <figure class="w-75 u-devices-v2__phone-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 317.5 665" style="enable-background:new 0 0 317.5 665;" xml:space="preserve">
+            <path class="u-fill-white" d="M263,666H54c-29.7,0-54-24.3-54-54V55C0,25.3,24.3,1,54,1h209c29.7,0,54,24.3,54,54v557
+              C317,641.7,292.7,666,263,666z"></path>
+            <circle class="u-fill-gray-75" cx="159.5" cy="619.5" r="25.5"></circle>
+            <path class="u-fill-gray-75" fill-rule="evenodd" clip-rule="evenodd" d="M180,52h-42c-2.2,0-4-1.8-4-4v0c0-2.2,1.8-4,4-4h42c2.2,0,4,1.8,4,4v0C184,50.2,182.2,52,180,52z"></path>
+            <g>
+              <defs>
+                <rect id="phoneFrameID1" x="19.4" y="81.3" width="280" height="500"></rect>
+              </defs>
+              <clippath id="phoneFrameID2">
+                <use xlink:href="#phoneFrameID1" style="overflow:visible;"></use>
+              </clippath>
+              <g style="clip-path:url(#phoneFrameID2);">
+                <!-- Apply your (282px width to 500px height) image here -->
+                <image style="overflow:visible;" width="282" height="500" xlink:href="../../assets/img/282x500/img3.jpg" transform="matrix(1 0 0 1 18 81)"></image>
+              </g>
+              <use class="u-fill-none u-stroke-light-blue-125" xlink:href="#phoneFrameID1" stroke-miterlimit="10" style="overflow: visible;"></use>
+            </g>
+          </svg>
+        </figure>
+      </div>
+      <!-- End SVG Phone Mockup -->
+    </div>
+    <!-- End Subscribe Section -->
+
+    <!-- SVG Background -->
+    <figure class="position-absolute-bottom-0 z-index-2">
+      <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="140px" viewBox="20 -20 300 100" style="margin-bottom: -8px;" xml:space="preserve">
+        <path class="u-fill-white" opacity="0.4" d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+    c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"></path>
+        <path class="u-fill-white" opacity="0.4" d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+    c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"></path>
+        <path class="u-fill-white" opacity="0" d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+    H42.401L43.415,98.342z"></path>
+        <path class="u-fill-white" d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+    c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"></path>
+      </svg>
+    </figure>
+    <!-- End SVG Background Section -->
+  </main>
+  <!-- ========== END MAIN ========== -->
+{% endblock %}
+{% block pageScripts %}
+    <!-- JS Plugins Init. -->
+  <script>
+    $(window).on('load', function () {
+      // initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        pageContainer: $('.container'),
+        breakpoint: 768,
+        hideTimeOut: 0
+      });
+    });
+
+    $(document).on('ready', function () {
+      // initialization of header
+      $.HSCore.components.HSHeader.init($('#header'));
+
+      // initialization of unfold component
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        afterOpen: function () {
+          $(this).find('input[type="search"]').focus();
+        }
+      });
+
+      // initialization of malihu scrollbar
+      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+      // initialization of show animations
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+      // initialization of form validation
+      $.HSCore.components.HSValidation.init('.js-validate', {
+        rules: {
+          confirmPassword: {
+            equalTo: '#password'
+          }
+        }
+      });
+
+      // initialization of forms
+      $.HSCore.helpers.HSFocusState.init();
+
+      // initialization of go to
+      $.HSCore.components.HSGoTo.init('.js-go-to');
+    });
+  </script>
+{% endblock %}

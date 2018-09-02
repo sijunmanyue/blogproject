@@ -1,0 +1,17 @@
+<!-- Newest Artcile -->
+{% if article %}
+    <div class="d-none d-md-block u-header__banner-v2 pr-4">
+        <div class="d-flex align-items-end">
+            {% load static %}
+          <img class="img-fluid mr-4" src="{% static 'blog/images/mockups/img4.png' %}" alt="Image Description" style="width: 200px;">
+          <div class="py-4">
+            <div class="mb-4">
+              <strong class="d-block u-header__banner-v2-title mb-2">最新文章</strong>
+              <span class="d-block u-header__banner-v2-text">{{ article.title }}</span>
+            </div>
+            <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="/blog/article/{{ article.id }}">抢先阅读 <span class="fa fa-angle-right ml-2"></span></a>
+          </div>
+        </div>
+    </div>
+{% endif %}
+<!-- Newest Artcile -->

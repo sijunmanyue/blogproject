@@ -1,0 +1,69 @@
+
+
+.logo-wrap a.logo {
+  text-transform: uppercase;
+  font-size: 24;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  display: block;
+}
+
+.logo-wrap  {
+  display: inline-block;
+  margin: 2em
+}
+
+/* linkone */
+.logo-wrap a.logo:before, .logo-wrap a.logo:after {
+  content: '';
+  border-bottom: solid 1px white;
+  position: absolute;
+  bottom: 0;
+  width: 0;
+}
+
+.logo-wrap a.logo:before { left: 0; }
+.logo-wrap a.logo:after { right: 0; }
+
+.logo-wrap a.logo:hover:before, .logo-wrap a.logo:hover:after {
+  width: 50%;
+}
+
+.logo-wrap a.logo:before, .logo-wrap a.logo:after {
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+}
+
+
+@-webkit-keyframes heartbeat {
+  0% { -webkit-transform: scale(1); }
+  10% { -webkit-transform: scale(1.1); }
+  20% { -webkit-transform: scale(1); }
+  30% { -webkit-transform: scale(1.1); }
+  40% { -webkit-transform: scale(1); }
+}
+
+@-webkit-keyframes heartbeat-x {
+  0% { -webkit-transform: scaleX(0); }
+  10% { -webkit-transform: scaleX(1); }
+  20% { -webkit-transform: scaleX(0); }
+  30% { -webkit-transform: scaleX(1); }
+  40% { -webkit-transform: scaleX(0); }
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  10% { transform: scale(1.1); }
+  20% { transform: scale(1); }
+  30% { transform: scale(1.1); }
+  40% { transform: scale(1); }
+}
+
+@keyframes heartbeat-x {
+  0% { transform: scaleX(0); }
+  10% { transform: scaleX(1); }
+  20% { transform: scaleX(0); }
+  30% { transform: scaleX(1); }
+  40% { transform: scaleX(0); }
+}

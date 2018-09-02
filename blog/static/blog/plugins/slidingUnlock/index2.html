@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <title>滑动解锁</title>
+</head>
+<style>
+    .no-select {
+        -moz-user-select: none;
+        -webkit-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+    }
+    #slidingUnlock {
+        width: 500px;
+        margin: 100px auto 0;
+        text-align: center;
+        line-height: 50px;
+        position: relative;
+        color: #ffffff;
+        background-color: #eeeeee;
+    }
+
+    #slidingUnlock-btn {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        float: left;
+        -webkit-box-shadow: 0 0 15px 0 #ddd;
+        -moz-box-shadow: 0 0 15px 0 #ddd;
+        box-shadow: 0 0 15px 0 #ddd;
+        color: #8a8c97;
+    }
+
+    #sliding-route {
+        height: 50px;
+        width: 0;
+        line-height: 50px;
+        text-align: center;
+        color: #ffffff;
+        background-color: green;
+        float: left;
+    }
+
+    #sliding-body {
+        height: 50px;
+        line-height: 50px;
+        clear: both;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+    }
+
+</style>
+<body>
+<div id="slidingUnlock" class="no-select">
+    <div id="sliding-body">
+        <div id="sliding-route" class="no-select"></div><div id="slidingUnlock-btn" class="iconfont icon-double-right"></div>
+    </div>
+    请按住滑块，移动到最右边
+</div>
+<script src="js/jquery-2.0.0.min.js"></script>
+<script>
+    
+    $(function () {
+
+        var domousedown = function (e) {
+            let startX = e.clientX;
+            let maxSlidingDis = $('#slidingUnlock').innerWidth() - $('#slidingUnlock-btn').outerWidth();
+            $(document).mousemove(function (e) {
+               let slidingDis =  e.clientX - startX;
+               if (slidingDis < maxSlidingDis) {
+                   //$('#sliding-body').width((slidingBodyWidth + slidingDis) + 'px');
+                   $('#sliding-route').width(slidingDis + 'px');
+               } else {
+                   $('#sliding-route').width(maxSlidingDis + 'px');
+                   $('#sliding-route').text('验证通过');
+                   $('#slidingUnlock-btn').removeClass('icon-double-right').addClass('icon-xuanzhong');
+
+                   $(document).unbind('mousemove');
+                   //$('#slidingUnlock-btn').unbind('mousedown');
+               }
+            });
+
+            $(document).mouseup(function () {
+                if ($('#slidingUnlock-btn').hasClass('icon-xuanzhong')) {
+                    $(document).unbind('mousemove');
+                } else {
+                    doreset();
+                }
+            });
+        };
+
+        var doreset = function() {
+            $(document).unbind('mousemove');
+            $('#sliding-route').width('0px').text('');
+            $('#slidingUnlock-btn').bind('mousedown', domousedown).removeClass('icon-xuanzhong').addClass('icon-double-right');
+        };
+
+        $('#slidingUnlock-btn').bind('mousedown', domousedown).dblclick(doreset);
+    });
+</script>
+</body>
+</html>

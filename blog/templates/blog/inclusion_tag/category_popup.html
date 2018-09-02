@@ -1,0 +1,34 @@
+<li class="nav-item hs-has-sub-menu u-header__nav-item hs-sub-menu-opened"
+    data-event="hover" data-animation-in="slideInUp"
+    data-animation-out="fadeOut">
+    <a id="categoryMegaMenu" class="nav-link u-header__nav-link"
+       href="javascript:;" aria-haspopup="true" aria-expanded="false" aria-labelledby="categorySubMenu">
+      类别
+{#      <span class="fa fa-angle-down u-header__nav-link-icon"></span>#}
+    </a>
+    <!-- Pages - Submenu -->
+    <ul id="categorySubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0 animated fadeOut"
+        style="min-width: 220px; display: none;" aria-labelledby="categoryMegaMenu">
+            {% for sup_category in category_tree %}
+                <li class="dropdown-item hs-has-sub-menu">
+                <a id="navLinkCategory{{ sup_category.code }}" class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
+                   href="{% url 'blog:articles-cate' sup_category.code %}" aria-haspopup="true" aria-expanded="false" aria-controls="navSubmenuCategory{{ sup_category.code }}">
+              {{ sup_category.name }}
+              <span class="fa fa-angle-right u-header__sub-menu-nav-link-icon"></span></a>
+
+            <!-- Submenu (level 2) -->
+            <ul id="navSubmenuCategory{{ sup_category.code }}"
+                class="hs-sub-menu list-unstyled u-header__sub-menu u-header__sub-menu-menu-gutter--y u-header__sub-menu-offset"
+                style="min-width: 220px; display: none;" aria-labelledby="navLinkCategory{{ sup_category.code }}">
+                {% for sub_category in sup_category.sub_category_set %}
+                    <li class="dropdown-item px-0">
+                      <a class="nav-link u-list__link px-4" href="{% url 'blog:articles-cate' sub_category.code %}">{{ sub_category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <!-- End Submenu (level 2) -->
+          </li>
+            {% endfor %}
+    </ul>
+    <!-- End Pages - Submenu -->
+</li>

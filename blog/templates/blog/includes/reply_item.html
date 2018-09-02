@@ -1,0 +1,38 @@
+{% load static%}
+<div class="reply-item" data-replyid="{{ reply.id }}">
+  {% ifequal reply.user reply.article.author %}
+              <span class="d-inline author pl-sm-1 pr-sm-1">作者</span>
+            {% endifequal %}<i>{{ reply.user.userinfo.nickname }}：</i>{{ reply.content }}
+  <ul class="list-inline d-flex mb-0">
+    <li class="list-inline-item">
+      <a class="text-secondary appreciate" href="javascript:void(0)">
+        <span class="count">{{ reply.appreciate }}</span>
+        <span class="far fa-thumbs-up ml-1"></span>
+      </a>
+    </li>
+    <li class="list-inline-item ml-3">
+      <a class="text-secondary dislike" href="javascript:void(0)">
+        <span class="count">{{ reply.dislike }}</span>
+        <span class="far fa-thumbs-down ml-1"></span>
+      </a>
+    </li>
+    <li class="list-inline-item ml-auto">
+      <a class="text-secondary to-reply" href="javascript:void(0)" {% if request.user.is_anonymous %}
+      role="button" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false"
+         data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent"
+         data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
+         data-unfold-duration="500"
+      {% endif %}>
+        <span class="far fa-comments mr-1"></span>
+        回复
+      </a>
+    </li>
+  </ul>
+  <div class="reply-box reply-reply mt-1" style="display: none">
+      <textarea class="reply-text mb-2 p-1" rows="5" placeholder="请输入您的回复..."></textarea>
+      <div class="text-right btn-group-sm">
+          <button type="button" class="btn-cancel btn btn-outline-secondary" style="line-height: .5rem;">取消</button>&nbsp;
+          <button type="button" class="btn-reply btn btn-outline-primary" style="line-height: .5rem;">回复</button>
+      </div>
+  </div>
+</div>

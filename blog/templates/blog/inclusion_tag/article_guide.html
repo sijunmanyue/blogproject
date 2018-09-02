@@ -1,0 +1,19 @@
+<!-- Newest Article -->
+{% load static %}
+<div id="newest_article_in_search_area" class="rounded u-search-push-top__banner">
+<div class="d-flex align-items-center">
+  <div class="u-search-push-top__banner-container">
+    <img class="img-fluid u-search-push-top__banner-img" src="{% static 'blog/images/mockups/img3.png' %}" alt=""/>
+    <img class="img-fluid u-search-push-top__banner-img" src="{% static 'blog/images/mockups/img2.png' %}" alt=""/>
+  </div>
+
+  <div>
+    <div class="mb-4">
+      <strong class="d-block mb-2">{{ title }}</strong>
+      <p>{{ articles.title }}</p>
+    </div>
+    <a class="btn btn-xs u-btn-success--air transition-3d-hover" href="/blog/article/{{ articles.id }}">读读看 <span class="fa fa-angle-right ml-2"></span></a>
+  </div>
+</div>
+</div>
+<!-- Newest Article -->

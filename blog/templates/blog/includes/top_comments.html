@@ -1,0 +1,25 @@
+{% load static %}
+{% if top_comments %}
+    <div class="my-7"></div>
+    {% for comment in result %}
+        <div class="media">
+          <div class="d-flex mr-3">
+            <img class="img-fluid u-md-avatar rounded-circle" src="/static/blog/images/100x100/img2.jpg" alt="Image Description">
+          </div>
+          <div class="media-body">
+            <div class="row mb-3 mb-sm-0">
+              <div class="col-sm-9 mb-2">
+                <h4 class="d-inline-block mb-0">
+                  <a class="d-block h6 mb-0" href="#">{{ comment.user.username }}</a>
+                </h4>
+                <small class="d-block text-muted">{{ comment.article.creationTime|timesince }}</small>
+              </div>
+              <div class="col-sm-3 text-sm-right">
+                <button type="button" class="btn btn-xs u-btn-primary--air font-weight-bold transition-3d-hover">回复</button>
+              </div>
+            </div>
+            <p class="small">{{ comment.content }}</p>
+          </div>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,262 @@
+{% extends 'blog/site.html' %}
+{% load static %}
+{% block title %}个人设置{% endblock %}
+{% block cssPlugins %}
+          <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/dzsparallaxer.css' %}">
+{% endblock %}
+{% block main %}
+      <!-- ========== MAIN ========== -->
+  <main id="content" role="main">
+    <!-- Hero Section -->
+    <div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll animation-engine-js loaded dzsprx-readyall" data-options="{direction: &quot;normal&quot;}">
+      <!-- Apply your Parallax background image here -->
+      <div class="divimage dzsparallaxer--target" style="height: 120%; background-image: url('{% static 'blog/images/1920x1080/img1.jpg' %}'); transform: translate3d(0px, -101.484px, 0px);"></div>
+
+      <!-- Content -->
+      <div class="container position-relative u-space-5-top u-space-3-bottom z-index-2">
+        <div class="w-lg-80 text-center mx-auto">
+          <h1 class="display-3 font-size-48--md-down text-white font-weight-bold">个人设置</h1>
+          <p class="lead text-white">我们不会涉及您的隐私，只是想让您有更好的体验.</p>
+        </div>
+      </div>
+      <!-- End Content -->
+    </div>
+    <!-- End Hero Section -->
+
+    <hr class="my-0">
+
+    <!-- Contact Form Section -->
+    <div class="container u-space-2">
+      <!-- Title -->
+      <div class="w-md-80 w-lg-60 text-center mx-auto mb-0">
+        <span class="btn-tips u-label u-label--sm u-label--success mb-2">温馨提示</span>
+        <div class="tips">
+            <h2 class="text-primary font-weight-normal">完善下面的信息，有哪些好处？</h2>
+            <p><b class="text-underline">昵称</b>会在评论和回复中显示，如果您没有昵称，默认显示<b>无名小辈</b>：）.</p>
+            <p>如果您绑定了<b class="text-underline">邮箱</b>，您可以使用邮箱登录，并且当您有新的回复时，我们也会邮件通知您.</p>
+            <p>上传您的个性<b class="text-underline">头像</b>，会让别人对你印象深刻，否则将使用默认头像.</p>
+            <p><b class="text-danger">请您注意</b>：您上传的头像图片尺寸最终会被截取为<b class="text-underline">100×100</b>，为了能正常显示，请上传尺寸大于或等于100×100，且图片不能大于<b class="text-underline">1M.</b></p>
+        </div>
+      </div>
+
+      <!-- End Title -->
+        
+      <div class="w-lg-80 mx-auto">
+
+        <div class="alert alert-success alert-dismissible fade" role="alert">
+          <strong>修改成功!</strong>.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- Contacts Form -->
+        <form id="editForm" class="js-validate" action="{% url 'blog:user-do-edit' %}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+            {% csrf_token %}
+          <div class="row">
+            <!-- Input -->
+            <div class="col-sm-6 mb-6">
+              <div class="js-form-message">
+                <label class="h6 small d-block text-uppercase">
+                  昵称
+                  <span class="text-danger">*</span>
+                </label>
+
+                <div class="js-focus-state input-group u-form">
+                  <input class="form-control u-form__input" type="text" name="nickname" value="{{ request.user.userinfo.nickname }}" required data-rule-maxlength="50"
+                         placeholder="请输入昵称" aria-label="" data-msg="昵称不能为空." data-msg-maxlength="昵称的长度不能超过50个字符."
+                         data-error-class="u-has-error" data-success-class="u-has-success">
+                </div>
+              </div>
+            </div>
+            <!-- End Input -->
+
+            <!-- Input -->
+            <div class="col-sm-6 mb-6">
+              <div class="js-form-message">
+                <label class="h6 small d-block text-uppercase">
+                  邮箱地址
+                  <span class="text-danger">*</span>
+                </label>
+
+                <div class="js-focus-state input-group u-form">
+                  <input class="form-control u-form__input" type="email" name="email" value="{{ request.user.userinfo.email }}" required placeholder="请输入您的邮箱"
+                         aria-label="" data-msg="邮箱地址不能为空." data-msg-email="请输入正确的邮箱地址." data-error-class="u-has-error" data-success-class="u-has-success">
+                </div>
+              </div>
+            </div>
+            <!-- End Input -->
+
+            <div class="w-100"></div>
+
+            <!-- Input -->
+            <div class="col-sm-6 mb-6">
+              <div class="js-form-message">
+                <label class="h6 small d-block text-uppercase">
+                  头像
+                </label>
+
+                <div class="js-focus-state input-group u-form">
+                  <input class="form-control u-form__input" type="text" name="avatar_text" placeholder="点击上传头像(.jpg, .jpeg, .png)" readonly aria-label="avatar"
+                         onclick="avatar.click()"/>
+                  <input type="file" name="avatar" accept="image/jpeg,image/png" style="display: none" onchange="avatar_text.value=this.value"/>
+                </div>
+              </div>
+            </div>
+            <!-- End Input -->
+
+            <!-- Input -->
+            <div class="col-sm-6 mb-6">
+              <div class="js-form-message">
+                <label class="h6 small d-block text-uppercase">
+                  职业
+                </label>
+
+                <div class="js-focus-state input-group u-form">
+                  <select class="form-control" name="job">
+                      <option>请选择职业</option>
+                      <option>WEB开发工程师</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- End Input -->
+
+                       <!-- Input -->
+            <div class="col-sm-6 mb-6">
+              <div class="js-form-message">
+                <label class="h6 small d-block text-uppercase">
+                  学历
+                </label>
+
+                <div class="js-focus-state input-group u-form">
+                  <select class="form-control" name="education">
+                      <option>请选择学历</option>
+                      <option>大专</option>
+                      <option>本科</option>
+                      <option>硕士</option>
+                      <option>博士</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- End Input -->
+
+            <!-- Input -->
+            <div class="col-sm-6 mb-6">
+              <div class="js-form-message">
+                <label class="h6 small d-block text-uppercase">
+                  性别
+                  <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group form-control-plaintext">
+                    <div class="js-focus-state u-form form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="male" name="gender" value="1" data-error-class="u-has-error" data-success-class="u-has-success" {% ifequal request.user.userinfo.gender 1 %}checked{% endifequal %}>
+                  <label class="form-check-label" for="male">男</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="female" name="gender" value="2" data-error-class="u-has-error" data-success-class="u-has-success" {% ifequal request.user.userinfo.gender 2 %}checked{% endifequal %}>
+                  <label class="form-check-label" for="female">女</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="secret" name="gender" value="0" data-error-class="u-has-error" data-success-class="u-has-success" {% ifequal request.user.userinfo.gender 0 %}checked{% endifequal %}>
+                  <label class="form-check-label" for="female">保密</label>
+                </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- End Input -->
+          </div>
+
+          <!-- Input -->
+          <div class="js-form-message mb-9">
+            <label class="h6 small d-block text-uppercase">
+              个性签名
+            </label>
+
+            <div class="input-group u-form">
+              <textarea class="form-control u-form__input" rows="4" name="signature" value="{{ request.user.userinfo.signature }}" placeholder="请输入您的个性签名..." aria-label="" data-msg="输入您的签名" data-error-class="u-has-error" data-success-class="u-has-success"></textarea>
+            </div>
+          </div>
+          <!-- End Input -->
+
+          <div class="text-center">
+            <button type="button" class="btn btn-primary u-btn-primary u-btn-wide transition-3d-hover mb-4">提交</button>
+          </div>
+        </form>
+        <!-- End Contacts Form -->
+      </div>
+    </div>
+    <!-- End Contact Form Section -->
+
+  </main>
+  <!-- ========== END MAIN ========== -->
+{% endblock %}
+{% block jsPlugins %}
+  <!-- JS Implementing Plugins -->
+  <script src="{% static 'blog/js/hs.megamenu.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.validate.min.js' %}"></script>
+{% endblock %}
+
+{% block pageScripts %}
+  <!-- JS Plugins Init. -->
+  <script>
+    $(window).on('load', function () {
+      // initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        pageContainer: $('.container'),
+        breakpoint: 768,
+        hideTimeOut: 0
+      });
+    });
+
+    $(document).on('ready', function () {
+      // initialization of header
+      $.HSCore.components.HSHeader.init($('#header'));
+
+      // initialization of malihu scrollbar
+      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+      // initialization of show animations
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+      // 表单提交验证
+      $.HSCore.components.HSValidation.init('.js-validate');
+
+      // initialization of forms
+      $.HSCore.helpers.HSFocusState.init();
+
+      // initialization of go to
+      $.HSCore.components.HSGoTo.init('.js-go-to');
+    });
+
+    // initialization of google map
+    function initMap() {
+      $.HSCore.components.HSGMap.init('.js-g-map');
+      $.HSCore.components.HSGMap.init('#gMapMultipleMarkers', {
+        infoWindowTemplate: function (imgsrc, imgalt, date, locationname, title) {
+          return '<div class="u-gmap-v1__info">' +
+            '<img class="img-fluid mb-2" src="' + imgsrc + '" alt="' + imgalt + '">' +
+            '<small class="d-block text-muted mb-2">' + date + '</small>' +
+            '<h4 class="h6 mb-0">' + title + '</h4>' +
+            '<p class="mb-0">' + locationname + '</p>' +
+            '</div>';
+        }
+      });
+    }
+
+    $('.tips').hide();
+    $('.btn-tips').click(function () {
+        $('.tips').toggle();
+    });
+  </script>
+    <script src="{% static 'blog/js/my_site/user_edit.js' %}"></script>
+{% endblock %}

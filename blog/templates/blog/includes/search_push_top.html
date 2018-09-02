@@ -1,0 +1,110 @@
+<!-- Search -->
+{% load static %}
+    <div id="searchPushTop" class="u-search-push-top u-unfold--jquery-slide u-unfold--hidden" style="display: none;">
+      <div class="container position-relative">
+        <div class="u-search-push-top__content mx-auto">
+          <!-- Close Button -->
+          <button type="button" class="close u-search-push-top__close-btn target-of-invoker-has-unfolds" aria-haspopup="true" aria-expanded="false" aria-controls="searchPushTop" data-unfold-type="jquery-slide" data-unfold-target="#searchPushTop">
+            <span aria-hidden="true">×</span>
+          </button>
+          <!-- End Close Button -->
+
+          <!-- Input -->
+          <form id="searchForm" method="get" class="js-focus-state input-group input-group-lg u-form u-form--lg u-form--no-brd" action="{% url 'blog:articles-list' %}">
+            <input type="search" id="key" name="key" class="form-control u-form__input" value="{{ key|default_if_none:'' }}" placeholder="输入您想要搜索的内容" aria-label="Search"/>
+            <div class="input-group-append">
+              <button type="button" class="btn btn-primary u-btn-primary" onclick="if ($('#key').val()) {
+                  $('#searchForm').submit();
+              }">搜索</button>
+            </div>
+          </form>
+          <!-- End Input -->
+
+          <!-- Link Lists -->
+          <div class="row d-none d-md-flex mt-7">
+            <div class="col-sm-6">
+              <strong class="d-block mb-2">热门搜索</strong>
+
+              <div class="row">
+                <!-- List -->
+                <ul class="col-sm-6 list-unstyled u-list">
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html#">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      Python
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html#">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      Django
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/pages/about-agency.html">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      php
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/pages/services-agency.html">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      面向对象
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html#">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      爬虫
+                    </a>
+                  </li>
+                </ul>
+                <!-- End List -->
+
+                                <!-- List -->
+                <ul class="col-sm-6 list-unstyled u-list">
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html#">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      Python
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html#">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      Django
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/pages/about-agency.html">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      php
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/pages/services-agency.html">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      面向对象
+                    </a>
+                  </li>
+                  <li>
+                    <a class="u-list__link" href="https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html#">
+                      <span class="fa fa-angle-right u-list__link-icon mr-1"></span>
+                      爬虫
+                    </a>
+                  </li>
+                </ul>
+                <!-- End List -->
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+                {% load article_guide %}
+                {% article_guide '最热文章' 'hot' %}
+            </div>
+          </div>
+          <!-- End Link Lists -->
+        </div>
+      </div>
+    </div>
+    <!-- End Search -->

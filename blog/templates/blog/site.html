@@ -1,0 +1,22 @@
+{% extends 'blog/layout.html' %}
+{% load static %}
+
+{% block container %}
+
+  <!-- Skippy -->
+  <a id="skippy" class="sr-only sr-only-focusable u-skippy" href="#content">
+    <div class="container">
+      <span class="u-skiplink-text">Skip to main content</span>
+    </div>
+  </a>
+
+  {% include 'blog/includes/header.html' with theme='regular' %}
+  {% block main %}{% endblock %}
+
+  {% include 'blog/includes/footer.html' %}
+  <!-- Go to Top -->
+  <a class="js-go-to u-go-to animated" href="#" data-position="{&quot;bottom&quot;: 15, &quot;right&quot;: 15 }" data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown" style="display: none; position: fixed; bottom: 15px; right: 15px; opacity: 0;">
+    <span class="fa fa-arrow-up u-go-to__inner"></span>
+  </a>
+  <!-- End Go to Top -->
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'blog/layout.html' %}
+{% load static %}
+{% block title %}网站首页{% endblock %}
+{% block cssPlugins %}
+  <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery.fancybox.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/custombox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/cubeportfolio.min.css' %}">
+{% endblock %}
+{% block container %}
+  <!-- Skippy -->
+  <a id="skippy" class="sr-only sr-only-focusable u-skippy" href="https://htmlstream.com/preview/front-v1.2/html/home/blog-agency.html#content">
+    <div class="container">
+      <span class="u-skiplink-text">Skip to main content</span>
+    </div>
+  </a>
+  <!-- End Skippy -->
+
+  {% include 'blog/includes/header.html' with theme='index' %}
+
+  <!-- ========== MAIN ========== -->
+  <main id="content" role="main">
+      {% include 'blog/includes/hero.html' with hero=author %}
+      {% load home_article_carousel %}
+      {% home_article_carousel 3 %}
+
+    <!-- Cubeportfolio News Section -->
+    <div class="u-bg-light-blue-50">
+      <div class="container u-cubeportfolio u-space-3">
+        <!-- Content -->
+        <div class="cbp mb-7"
+             data-layout="mosaic"
+             data-animation="quicksand"
+             data-x-gap="30"
+             data-y-gap="30"
+             data-load-more-selector="#cubeLoadMore"
+             data-load-more-action="auto"
+             data-load-items-amount="3"
+             data-media-queries='[
+              {"width": 1500, "cols": 3},
+              {"width": 1100, "cols": 3},
+              {"width": 800, "cols": 3},
+              {"width": 480, "cols": 1}
+          ]'>
+
+            {% include 'blog/includes/falls.html' with articles=articles %}
+        </div>
+        <!-- End Content -->
+
+        <!-- Load More Button -->
+        <div id="cubeLoadMore" class="text-center">
+          <a href="#" class="cbp-l-loadMore-link u-link" rel="nofollow">
+            <span class="cbp-l-loadMore-defaultText">
+              Load More
+              <span class="u-link__icon ml-1">
+                <span class="u-link__icon-inner">&#43;</span>
+              </span>
+            </span>
+            <span class="cbp-l-loadMore-loadingText">Loading...</span>
+            <span class="cbp-l-loadMore-noMoreLoading">No more works</span>
+          </a>
+        </div>
+        <!-- End Load More Button -->
+      </div>
+    </div>
+    <!-- End Cubeportfolio News Section -->
+
+    {% include 'blog/includes/leave_message.html' with theme='warning' %}
+
+  </main>
+  <!-- ========== END MAIN ========== -->
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="container text-center u-space-2">
+    {% include 'blog/includes/copyright.html' %}
+  </footer>
+  <!-- ========== END FOOTER ========== -->
+
+  <!-- Go to Top -->
+  <a class="js-go-to u-go-to animated js-animation-was-fired slideInUp" href="#" data-position="{&quot;bottom&quot;: 15, &quot;right&quot;: 15 }" data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown" style="display: inline-block; position: fixed; bottom: 15px; right: 15px;">
+    <span class="fa fa-arrow-up u-go-to__inner"></span>
+  </a>
+  <!-- End Go to Top -->
+
+{% endblock %}
+{% block jsPlugins %}
+      <!-- JS Implementing Plugins -->
+      <script src="{% static 'blog/js/jquery.exitintent.min.js' %}"></script>
+      <script src="{% static 'blog/js/custombox.min.js' %}"></script>
+      <script src="{% static 'blog/js/hs.megamenu.js' %}"></script>
+      <script src="{% static 'blog/js/jquery.validate.min.js' %}"></script>
+      <script src="{% static 'blog/js/jquery.fancybox.min.js' %}"></script>
+      <script src="{% static 'blog/js/slick.js' %}"></script>
+      <script src="{% static 'blog/js/jquery.cubeportfolio.min.js' %}"></script>
+{% endblock %}
+{% block pageScripts %}
+  <script src="{% static 'blog/js/hs.fancybox.js' %}"></script>
+  <script src="{% static 'blog/js/hs.modal-window.js' %}"></script>
+  <script src="{% static 'blog/js/hs.cubeportfolio.js' %}"></script>
+  <!-- JS Plugins Init. -->
+  <script>
+
+    $(window).on('load', function () {
+      // initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        pageContainer: $('.container'),
+        breakpoint: 768,
+        hideTimeOut: 0
+      });
+    });
+
+    $(document).on('ready', function () {
+      // initialization of header
+      $.HSCore.components.HSHeader.init($('#header'));
+
+      // initialization of unfold component
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+      // initialization of forms
+      $.HSCore.helpers.HSFocusState.init();
+
+      // initialization of form validation
+      $.HSCore.components.HSValidation.init('.js-validate');
+
+      // initialization of fancybox
+      $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+      // initialization of slick carousel
+      $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+      // initialization of cubeportfolio
+      $.HSCore.components.HSCubeportfolio.init('.cbp');
+
+      // initialization of go to
+      $.HSCore.components.HSGoTo.init('.js-go-to');
+    });
+  </script>
+{% endblock %}

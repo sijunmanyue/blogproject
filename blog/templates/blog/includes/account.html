@@ -1,0 +1,45 @@
+{% load static %}
+<!-- Account -->
+
+<li class="nav-item hs-has-mega-menu u-header__nav-item {% ifequal theme 'index' %}ml-auto{% endifequal %}" data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut" data-max-width="440px" data-position="right">
+    <a id="shopMegaMenu" class="nav-link u-header__nav-link" href="javascript:;" aria-haspopup="true" aria-expanded="false">
+              <img src="{{ request.user.userinfo.avatar.url }}" style="display: inline-block;height: 30px;border-radius: 15px" alt="">
+    {{ request.user.userinfo.nickname }}
+      <span class="fa fa-angle-down u-header__nav-link-icon"></span>
+    </a>
+
+    <div class="hs-mega-menu u-header__sub-menu" aria-labelledby="shopMegaMenu" style="display: none;">
+      <div class="u-header__mega-menu-wrapper-v1">
+
+
+        <div class="row">
+          <div class="col-sm-6">
+              <strong class="d-block mb-2">账户管理</strong>
+            <!-- Links -->
+            <ul class="list-unstyled u-list">
+              <li><a class="nav-link u-list__link py-2 px-0" href="{% url 'blog:user-edit' %}">个人设置</a></li>
+              <li><a class="nav-link u-list__link py-2 px-0" href="{% url 'blog:user-edit' %}">密码修改</a></li>
+              <li><a class="nav-link u-list__link py-2 px-0" href="{% url 'blog:user-logout' %}">退出登录</a></li>
+            </ul>
+            <!-- End Links -->
+          </div>
+
+          <div class="col-sm-6">
+              <strong class="d-block mb-2">评论管理</strong>
+            <!-- Links -->
+            <ul class="list-unstyled u-list">
+              <li><a class="nav-link u-list__link py-2 px-0" href="#">我的评论</a></li>
+              <li><a class="nav-link u-list__link py-2 px-0" href="#">我的回复</a></li>
+              <li><a class="nav-link u-list__link py-2 px-0" href="#">回复我的</a></li>
+            </ul>
+            <!-- End Links -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- End Shop - Mega Menu -->
+  </li>
+
+
+<!-- End Account -->

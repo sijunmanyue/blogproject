@@ -1,0 +1,189 @@
+{% extends 'blog/site.html' %}
+{% load static %}
+{% load highlighting %}
+{% load smart_timesince %}
+{% block title %}文章页面{% endblock %}
+{% block cssPlugins %}
+      <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.css' %}">
+{% endblock %}
+
+{% block main %}
+
+  <!-- ========== MAIN ========== -->
+  <main id="content" role="main">
+    <!-- Blog Classic Section -->
+    <div class="container u-space-4-top u-space-5-top--md u-space-4-top--lg u-space-3-bottom">
+      <!-- Title -->
+      <div class="w-md-80 w-lg-60 mb-9">
+        <h2 class="font-weight-normal" id="welcome">当前位置 - <span class="text-primary font-weight-bold">{{ request.path_info }}</span></h2>
+      </div>
+      <!-- End Title -->
+
+      <div class="row">
+        <div class="col-lg-9 order-lg-2 mb-9 mb-lg-0">
+          <!-- Articles Section -->
+          <span id="article_start" style="float: left; margin-top: 72px"></span>
+          <div class="row">
+            {% for article in articles %}
+                <div class="col-sm-6 mb-7">
+                  <!-- Article -->
+                  <article>
+                    <div class="mb-5">
+                        <a href="{% url 'blog:article-detail' article.id %}"><img class="img-fluid rounded" src="{{ article.picture.url }}" alt="Image Description"></a>
+                    </div>
+                    <small class="d-block text-secondary mb-1">{{ article.creationTime|smart_timesince}}</small>
+                    <h2 class="h5">
+                      <a class="text-overflow-ellipsis" title="{{ article.title }}" href="{% url 'blog:article-detail' article.id %}">{% highlighting article.title words 'danger' %}</a>
+                    </h2>
+                    <p>
+                        {% highlighting article.summary words 'warning' %}
+                    </p>
+                  </article>
+                  <!-- End Article -->
+                </div>
+            {% endfor %}
+          </div>
+          <!-- End News Classic -->
+
+          <div class="u-space-2-bottom"></div>
+          {% include 'blog/includes/pagination.html' with result=articles %}
+
+          <div id="fixedEndPoint"></div>
+        </div>
+
+        <div id="stickyBlockStartPoint" class="col-lg-3 order-lg-1">
+          <!-- Sticky Block -->
+          <div class="js-sticky-block"
+               data-has-sticky-header="true"
+               data-offset-target="#" {# logoAndNav #}
+               data-sticky-view="lg"
+               data-start-point="#stickyBlockStartPoint"
+               data-end-point="#stickyBlockEndPoint"
+               data-offset-top="32"  {# 32 #}
+               data-offset-bottom="50" {# 50 #}>
+
+              {% load about_me %}
+              {% about_me %}
+
+              {% load article_guide %}
+              {% article_list_guide '热门文章' 'hot' %}
+
+              <!-- Tags -->
+              {% load tag_cloud %}
+              {% tag_cloud '热门标签' 10 %}
+              <!-- End Tags -->
+
+              <!-- Friend links -->
+              {% load fri_links %}
+              {% fri_links '友情链接' 10 %}
+              <!-- End Tags -->
+          </div>
+          <!-- End Sticky Block -->
+        </div>
+      </div>
+    </div>
+    <!-- End Blog Classic Section -->
+      </div>
+    </div>
+    <!-- End Blog Classic Section -->
+
+    <!-- Sticky Block End Point -->
+    <div id="stickyBlockEndPoint"></div>
+
+    {% include 'blog/includes/leave_message.html' with theme='primary' %}
+
+  </main>
+  <!-- ========== END MAIN ========== -->
+{% endblock %}
+
+{% block jsPlugins %}
+      <!-- JS Implementing Plugins -->
+  <script src="{% static 'blog/js/hs.megamenu.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'blog/js/instafeed.min.js' %}"></script>
+
+{% endblock %}
+
+{% block pageScripts %}
+      <!-- JS Plugins Init. -->
+  <script>
+    $(window).on('load', function () {
+      // initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        pageContainer: $('.container'),
+        breakpoint: 768,
+        hideTimeOut: 0
+      });
+    });
+
+    $(document).on('ready', function () {
+      // initialization of header
+      $.HSCore.components.HSHeader.init($('#header'));
+
+      // initialization of unfold component
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        afterOpen: function () {
+          $(this).find('input[type="search"]').focus();
+        }
+      });
+
+      // initialization of malihu scrollbar
+      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+      // initialization of show animations
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+      // initialization of forms
+      $.HSCore.helpers.HSFocusState.init();
+
+      // initialization of sticky blocks
+      setTimeout(function () {
+        $.HSCore.components.HSStickyBlock.init('.js-sticky-block');
+      }, 300);
+
+      // initialization of instagram api
+      $.HSCore.components.HSInstagram.init('#instaFeed', {
+        resolution: 'standard_resolution',
+        after: function () {
+          // initialization of masonry.js
+          var $grid = $('.js-instagram').masonry({
+            percentPosition: true
+          });
+
+          // initialization of images loaded
+          $grid.imagesLoaded().progress(function () {
+            $grid.masonry();
+          });
+        }
+      });
+
+      // initialization of go to
+      $.HSCore.components.HSGoTo.init('.js-go-to');
+    });
+    
+    $(function () {
+        $('.article_list_guide img').each(function () {
+            $(this).css('marginLeft', -($(this).width() - $(this).height())/2)
+        });
+
+        $('.article_list_guide img').hover(function () {
+            let img = $(this);
+            img.css('height', '55px');
+            img.css('marginLeft', -($(this).width() - $(this).height())/2);
+            img.css('marginLop', -($(this).height() - 44)/2);
+        }, function () {
+            let img = $(this);
+            img.css('height', '44px');
+            img.css('marginLeft', -($(this).width() - $(this).height())/2);
+            img.css('marginLop', -($(this).height() - 44)/2);
+        });
+    });
+
+  </script>
+{% endblock %}

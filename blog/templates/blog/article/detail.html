@@ -1,0 +1,193 @@
+{% extends 'blog/site.html' %}
+{% load static %}
+{% block title %}文章详情页{% endblock %}
+{% block cssPlugins %}
+      <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/dzsparallaxer.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/plugins/prism/prism.css' %}">
+  <style>
+    .reply-item:not(:last-child) {margin-bottom: 5px;}
+    .reply-box .reply-text {width: 100%; border: 1px solid #f0f0f0;}
+    .reply-list {background-color: #f7f7f7;}
+    .author {border: 1px solid #377dff; font-size: .5rem; border-radius: .1rem; color:#377dff;}
+  </style>
+{% endblock %}
+
+{% block header_css %}u-scrolled js-header-fix-moment{% endblock %}
+{% block main %}
+  <!-- ========== MAIN ========== -->
+  <main id="content" role="main">
+    <!-- Hero Section -->
+    <div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll" data-options='{direction: "normal"}'>
+      <!-- Apply your Parallax background image here -->
+      <div class="divimage dzsparallaxer--target" style="height: 130%; background-image: url('{% static 'blog/images/1920x1080/img1.jpg' %}');"></div>
+
+      <!-- Content -->
+      <div class="js-scroll-effect position-relative"
+           data-scroll-effect="smoothFadeToBottom">
+        <div class="container u-space-5-top u-space-1-bottom">
+          <div class="text-center w-lg-80 mx-auto u-space-3-bottom">
+            <h1 class="display-4 font-size-48--md-down text-white font-weight-normal mb-0">{{ article.title }}</h1>
+          </div>
+
+          <!-- Author -->
+          <div class="text-center">
+            <img class="img-fluid u-sm-avatar rounded-circle mb-2" src="{{ article.category.picture.url }}" alt="Image Description">
+            <span class="d-block">
+              <a class="text-white h6 mb-0" href="/category/{{ article.category.code }}">{{ article.category.name }}</a>
+            </span>
+          </div>
+          <!-- End Author -->
+        </div>
+      </div>
+      <!-- End Content -->
+    </div>
+    <!-- End Hero Section -->
+
+    <!-- Description Section -->
+    <div class="container u-space-3-top">
+      <div class="w-lg-60 mx-auto">
+          <ul class="u-link">
+              <li>本文链接：<a class="u-link-muted" href='{% url 'blog:article-detail' article.id %}'>{% url 'blog:article-detail' article.id %}</a></li>
+              <li>转载请注明出处.</li>
+          </ul>
+          <div id="detail">
+                   {% autoescape off %}
+                {{ article.content }}
+              {% endautoescape %}
+          </div>
+      </div>
+    </div>
+    <!-- End Description Section -->
+
+    <input hidden id="article_id" value="{{ article.id }}"/>
+
+    <!-- Description Section -->
+    <div class="container">
+      <div class="w-lg-60 mx-auto">
+       <!-- Tags -->
+        <ul class="list-inline text-center mb-0">
+            {% for tag in tags %}
+                <li class="list-inline-item pb-0">
+                    <a class="u-label u-label--xs u-label--secondary" href="{% url 'blog:articles-tag' tag.code %}">{{ tag.name }}</a>
+                  </li>
+            {% endfor %}
+        </ul>
+        <!-- End Tags -->
+
+        <hr class="my-5">
+
+        <!-- Social Networks -->
+        <ul class="list-inline text-center mb-0">
+          <li class="list-inline-item">
+            <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#" title="分享到腾讯QQ">
+              <span class="fab fa-qq u-icon__inner"></span>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#" title="分享到微信">
+              <span class="fab fa-weibo u-icon__inner"></span>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="u-bg-transparent u-icon u-icon-secondary--air" href="#" title="分享到新浪微博">
+              <span class="fab fa-weixin u-icon__inner"></span>
+            </a>
+          </li>
+        </ul>
+        <!-- End Social Networks -->
+
+        <hr class="my-5">
+
+        {% include 'blog/includes/comment_box.html' %}
+
+      </div>
+    </div>
+    <!-- End Description Section -->
+
+    {% include 'blog/includes/comments.html' %}
+
+    {% include 'blog/includes/leave_message.html' with theme='primary' %}
+  </main>
+  <!-- ========== END MAIN ========== -->
+{% endblock %}
+
+{% block jsPlugins %}
+  <!-- JS Implementing Plugins -->
+  <script src="{% static 'blog/js/hs.megamenu.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'blog/js/dzsparallaxer.js' %}"></script>
+  <script src="{% static 'blog/js/slick.js' %}"></script>
+{% endblock %}
+
+{% block pageScripts %}
+    <!-- JS Plugins Init. -->
+    <script src="{% static 'blog/plugins/prism/prism.js' %}"></script>
+    <script src="{% static 'blog/js/my_site/detail.js' %}"></script>
+    <script src="{% static 'blog/js/my_site/login.js' %}"></script>
+  <script>
+    $(window).on('load', function () {
+      // initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        pageContainer: $('.container'),
+        breakpoint: 768,
+        hideTimeOut: 0
+      });
+    });
+
+    $(document).on('ready', function () {
+      // initialization of header
+      $.HSCore.components.HSHeader.init($('#header'));
+
+      // initialization of unfold component
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        afterOpen: function () {
+          $(this).find('input[type="search"]').focus();
+        }
+      });
+
+      // initialization of malihu scrollbar
+      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+      // initialization of show animations
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+      // initialization of form validation
+      $.HSCore.components.HSValidation.init('.js-validate', {
+        rules: {
+          confirmPassword: {
+            equalTo: '#password'
+          }
+        }
+      });
+
+      // initialization of forms
+      $.HSCore.helpers.HSFocusState.init();
+
+      // initialization of scroll effect component
+      $.HSCore.components.HSScrollEffect.init('.js-scroll-effect');
+
+      // initialization of slick carousel
+      $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+      // initialization of go to
+      $.HSCore.components.HSGoTo.init('.js-go-to');
+    });
+
+    // 修复文章详情页， 富文本由于white-space:pre-wrap导致间距过大的问题
+    $(function () {
+        $('#detail div').each(function () {
+            if ($(this).css('white-space') === 'pre-wrap') {
+                $(this).css('white-space', 'nowrap');
+            }
+        });
+    });
+  </script>
+{% endblock %}
