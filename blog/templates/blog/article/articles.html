@@ -1,12 +1,12 @@
-{% extends 'blog/site.html' %}
+{% extends 'blog/layout.html' %}
 {% load static %}
 {% block title %}文章列表页{% endblock %}
 {% block cssPlugins %}
       <!-- CSS Implementing Plugins -->
-  <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
-  <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
-  <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
-  <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.css' %}">
 {% endblock %}
 {% block main %}
       <!-- ========== MAIN ========== -->
@@ -71,7 +71,7 @@
   <script src="{% static 'blog/js/hs.megamenu.js' %}"></script>
   <script src="{% static 'blog/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
   <script src="{% static 'blog/js/jquery.validate.min.js' %}"></script>
-  <script src="{% static 'blog/js/my_site/login.js' %}"></script>
+  <script src="{% static 'blog/js/jb.login.js' %}"></script>
 {% endblock %}
 
 {% block pageScripts %}

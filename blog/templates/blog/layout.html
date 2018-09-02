@@ -1,5 +1,5 @@
+{% load static %}
 <!DOCTYPE html>
-<!-- saved from url=(0077)https://htmlstream.com/preview/front-v1.2/html/blog/classic-left-sidebar.html -->
 <html lang="en">
 <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,7 +8,6 @@
       <!-- Required Meta Tags Always Come First -->
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-       {% load static %}
       <!-- Favicon -->
       <link rel="shortcut icon" href="{% static 'blog/images/svg/favicon.png' %}">
       <!-- Google Fonts -->
@@ -17,17 +16,26 @@
       <link rel="stylesheet" href="{% static 'blog/css/bootstrap.css' %}">
       <!-- CSS Implementing Plugins -->
       {% block cssPlugins %}{% endblock %}
-
-
-
       <!-- CSS Front Template -->
       <link rel="stylesheet" href="{% static 'blog/css/front.css' %}">
-      <link rel="stylesheet" href="{% static 'blog/plugins/slidingUnlock/font/iconfont.css' %}">
 </head>
 <body>
-  {% block container %}{% endblock %}
+  <!-- Skippy -->
+  <a id="skippy" class="sr-only sr-only-focusable u-skippy" href="#content">
+    <div class="container">
+      <span class="u-skiplink-text">Skip to main content</span>
+    </div>
+  </a>
+  {% block container %}
+      {% block header %}{% include 'blog/includes/header.html' with theme='regular' %}{% endblock %}
+      {% block main %}{% endblock %}
+  {% endblock %}
   {% include 'blog/includes/aside.html' %}
-
+  {% include 'blog/includes/footer.html' %}
+  <!-- Go to Top -->
+  <a class="js-go-to u-go-to animated" href="#" data-position="{&quot;bottom&quot;: 15, &quot;right&quot;: 15 }" data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown" style="display: none; position: fixed; bottom: 15px; right: 15px; opacity: 0;">
+    <span class="fa fa-arrow-up u-go-to__inner"></span>
+  </a>
   <!-- JS Global Compulsory -->
   <script src="{% static 'blog/js/jquery.min.js' %}"></script>
   <script src="{% static 'blog/js/jquery-migrate.min.js' %}"></script>
@@ -36,8 +44,7 @@
   <script src="{% static 'blog/js/jquery.mousewheel.min.js' %}"></script>
   <script src="{% static 'blog/plugins/layer/layer.js' %}"></script>
 
-  {% block jsPlugins %}
-  {% endblock %}
+  {% block jsPlugins %}{% endblock %}
 
   <!-- JS Front -->
   <script src="{% static 'blog/js/hs.core.js' %}"></script>
@@ -53,9 +60,8 @@
   <script src="{% static 'blog/js/hs.slick-carousel.js' %}"></script>
   <script src="{% static 'blog/js/hs.go-to.js' %}"></script>
   <script src="{% static 'blog/js/jquery-1.4.1.cookie.js' %}"></script>
-  <script src="{% static 'blog/js/my_site/aside.js' %}"></script>
-  <script src="{% static 'blog/js/my_site/leave_message.js' %}"></script>
-  <script src="{% static 'blog/js/my_site/slide.box.js' %}"></script>
+  <script src="{% static 'blog/js/jb.aside.js' %}"></script>
+  <script src="{% static 'blog/js/jb.leave-message.js' %}"></script>
   <!-- JS Page -->
   <script id="init-script">
       $.ajaxSetup({

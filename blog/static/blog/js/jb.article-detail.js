@@ -98,7 +98,6 @@ $(function () {
         let type = msg.dataset.type;
         let data = {'type':type, 'content':reply_content,'article_id':article_id, 'comment_id':comment_id, 'reply_to':reply_to};
 
-        console.log(data);
         $.ajax({
             url:'/blog/reply/',
             method:'post',
@@ -117,7 +116,6 @@ $(function () {
 
     $('.comment-box .btn-reply.active').click(function () {
         if ($('.comment-box textarea').val() !== '') {
-            let $this = $(this);
             let article_id = $('#article_id').val();
             let content = $('.comment-box textarea').val();
 
@@ -150,7 +148,6 @@ $(function () {
     let global_page_size = 10;
 
     let get_more = function (page_size) {
-        console.log('======load more======');
         let filter_ids = '';
         $('.new-comment').each(function () {
             filter_ids += (',' + $(this).get(0).dataset.commentid);

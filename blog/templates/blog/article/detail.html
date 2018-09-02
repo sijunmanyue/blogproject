@@ -1,4 +1,4 @@
-{% extends 'blog/site.html' %}
+{% extends 'blog/layout.html' %}
 {% load static %}
 {% block title %}文章详情页{% endblock %}
 {% block cssPlugins %}
@@ -10,12 +10,6 @@
   <link rel="stylesheet" href="{% static 'blog/css/dzsparallaxer.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/slick.css' %}">
   <link rel="stylesheet" href="{% static 'blog/plugins/prism/prism.css' %}">
-  <style>
-    .reply-item:not(:last-child) {margin-bottom: 5px;}
-    .reply-box .reply-text {width: 100%; border: 1px solid #f0f0f0;}
-    .reply-list {background-color: #f7f7f7;}
-    .author {border: 1px solid #377dff; font-size: .5rem; border-radius: .1rem; color:#377dff;}
-  </style>
 {% endblock %}
 
 {% block header_css %}u-scrolled js-header-fix-moment{% endblock %}
@@ -129,8 +123,8 @@
 {% block pageScripts %}
     <!-- JS Plugins Init. -->
     <script src="{% static 'blog/plugins/prism/prism.js' %}"></script>
-    <script src="{% static 'blog/js/my_site/detail.js' %}"></script>
-    <script src="{% static 'blog/js/my_site/login.js' %}"></script>
+    <script src="{% static 'blog/js/jb.article-detail.js' %}"></script>
+    <script src="{% static 'blog/js/jb.login.js' %}"></script>
   <script>
     $(window).on('load', function () {
       // initialization of HSMegaMenu component

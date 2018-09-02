@@ -1,10 +1,8 @@
-{% extends 'blog/site.html' %}
-{% load static %}
-{% load highlighting %}
-{% load smart_timesince %}
+{% extends 'blog/layout.html' %}
+{% load static about_me highlighting smart_timesince tag_cloud fri_links article_guide %}
 {% block title %}文章页面{% endblock %}
 {% block cssPlugins %}
-      <!-- CSS Implementing Plugins -->
+  <!-- CSS Implementing Plugins -->
   <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/hs.megamenu.css' %}">
@@ -65,22 +63,10 @@
                data-end-point="#stickyBlockEndPoint"
                data-offset-top="32"  {# 32 #}
                data-offset-bottom="50" {# 50 #}>
-
-              {% load about_me %}
               {% about_me %}
-
-              {% load article_guide %}
               {% article_list_guide '热门文章' 'hot' %}
-
-              <!-- Tags -->
-              {% load tag_cloud %}
               {% tag_cloud '热门标签' 10 %}
-              <!-- End Tags -->
-
-              <!-- Friend links -->
-              {% load fri_links %}
               {% fri_links '友情链接' 10 %}
-              <!-- End Tags -->
           </div>
           <!-- End Sticky Block -->
         </div>

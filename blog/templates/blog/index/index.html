@@ -10,16 +10,9 @@
   <link rel="stylesheet" href="{% static 'blog/css/animate.min.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/cubeportfolio.min.css' %}">
 {% endblock %}
-{% block container %}
-  <!-- Skippy -->
-  <a id="skippy" class="sr-only sr-only-focusable u-skippy" href="https://htmlstream.com/preview/front-v1.2/html/home/blog-agency.html#content">
-    <div class="container">
-      <span class="u-skiplink-text">Skip to main content</span>
-    </div>
-  </a>
-  <!-- End Skippy -->
+{% block main %}
 
-  {% include 'blog/includes/header.html' with theme='index' %}
+  {% block header %}{% include 'blog/includes/header.html' with theme='index' %}{% endblock %}
 
   <!-- ========== MAIN ========== -->
   <main id="content" role="main">
@@ -79,11 +72,6 @@
   </footer>
   <!-- ========== END FOOTER ========== -->
 
-  <!-- Go to Top -->
-  <a class="js-go-to u-go-to animated js-animation-was-fired slideInUp" href="#" data-position="{&quot;bottom&quot;: 15, &quot;right&quot;: 15 }" data-type="fixed" data-offset-top="400" data-compensation="#header" data-show-effect="slideInUp" data-hide-effect="slideOutDown" style="display: inline-block; position: fixed; bottom: 15px; right: 15px;">
-    <span class="fa fa-arrow-up u-go-to__inner"></span>
-  </a>
-  <!-- End Go to Top -->
 
 {% endblock %}
 {% block jsPlugins %}

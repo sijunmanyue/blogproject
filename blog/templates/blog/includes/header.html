@@ -2,7 +2,7 @@
 {% load static %}
 {% with theme_index_header_class='u-header u-header--bg-transparent u-header--abs-top' theme_regular_header_class='u-header u-header--abs-top-md u-header--show-hide-md' %}
     <header id="header" class="{% ifequal theme 'index' %}{{ theme_index_header_class }}{% else %}{{ theme_regular_header_class }}{% endifequal %}" data-header-fix-moment="500" data-header-fix-effect="slide">
-       {% include 'blog/includes/search_push_top.html' %}
+       {% ifequal theme 'regular' %}{% include 'blog/includes/search_push_top.html' %}{% endifequal %}
        <div class="u-header__section">
            {% ifequal theme 'regular' %}{% include 'blog/includes/topbar.html' %}{% endifequal %}
            {% include 'blog/includes/logo_and_nav.html' with theme=theme %}
