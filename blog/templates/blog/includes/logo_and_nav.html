@@ -1,71 +1,77 @@
 {% load static %}
-    <div id="logoAndNav" class="container">
+<div id="logoAndNav" class="container">
     <!-- Nav -->
     <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar hs-menu-initialized hs-menu-horizontal">
-      <!-- Logo -->
-      {% with theme_index_logo_class='navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space mr-9' theme_regular_logo_class='navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space' %}
-          <a class="{% ifequal theme 'index' %}{{ theme_index_logo_class }}{% else %}{{ theme_regular_logo_class }}{% endifequal %}" href="/blog/" aria-label="Front">
-              <b class="logo">JOY BLOG</b>
-          </a>
-      {% endwith %}
-      <!-- End Logo -->
+        <!-- Logo -->
+        {% with theme_index_logo_class='navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space mr-9' theme_regular_logo_class='navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space' %}
+            <a class="
+                    {% ifequal theme 'index' %}{{ theme_index_logo_class }}{% else %}{{ theme_regular_logo_class }}{% endifequal %}"
+               href="/blog/" aria-label="Front">
+                <b class="logo">JOY BLOG</b>
+            </a>
+        {% endwith %}
+        <!-- End Logo -->
 
-      <!-- Responsive Toggle Button -->
-      <button type="button" class="navbar-toggler btn u-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
+        <!-- Responsive Toggle Button -->
+        <button type="button" class="navbar-toggler btn u-hamburger" aria-label="Toggle navigation"
+                aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
         <span id="hamburgerTrigger" class="u-hamburger__box">
           <span class="u-hamburger__inner"></span>
         </span>
-      </button>
-      <!-- End Responsive Toggle Button -->
+        </button>
+        <!-- End Responsive Toggle Button -->
 
-      <!-- Navigation -->
-      <div id="navBar" class="collapse navbar-collapse py-0 {% ifequal theme 'index' %}ml-9{% endifequal %}">
+        <!-- Navigation -->
+        <div id="navBar" class="collapse navbar-collapse py-0 {% ifequal theme 'index' %}ml-9{% endifequal %}">
             {% with theme_index_nav_class='navbar-nav w-100 u-header__navbar-nav' theme_regular_nav_class='navbar-nav u-header__navbar-nav ml-lg-auto' %}
-                <ul class="{% ifequal theme 'index' %}{{ theme_index_nav_class }}{% else %}{{ theme_regular_nav_class }}{% endifequal %}">
+                <ul class="
+                        {% ifequal theme 'index' %}{{ theme_index_nav_class }}{% else %}{{ theme_regular_nav_class }}{% endifequal %}">
             {% endwith %}
-          <!-- Home -->
-          <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened"
-              data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut" data-position="left">
-            <a id="homeMegaMenu" class="nav-link u-header__nav-link pl-0" href="{% url 'blog:index' %}" aria-haspopup="false" aria-expanded="false">首页</a>
-          </li>
-          <li class="nav-item hs-has-mega-menu u-header__nav-item" data-event="hover"
+            <!-- Home -->
+            <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened"
+                data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut" data-position="left">
+                <a id="homeMegaMenu" class="nav-link u-header__nav-link pl-0" href="{% url 'blog:index' %}"
+                   aria-haspopup="false" aria-expanded="false">首页</a>
+            </li>
+            <li class="nav-item hs-has-mega-menu u-header__nav-item" data-event="hover"
                 data-animation-in="slideInUp" data-animation-out="fadeOut"
                 data-position="right">
-            <a id="documentMegaMenu" class="nav-link u-header__nav-link" href="{% url 'blog:articles-list' %}" aria-haspopup="true" aria-expanded="false">
-              发现
-{#              <span class="fa fa-angle-down u-header__nav-link-icon"></span>#}
-            </a>
-          </li>
-          <li class="nav-item u-header__nav-item">
-              <a class="nav-link u-header__nav-link" href="{% url 'blog:tags-lists' %}" >专题</a></li>
-          <li class="nav-item u-header__nav-item">
-              <a class="nav-link u-header__nav-link" href="#" >视频</a></li>
-          <li class="nav-item u-header__nav-item">
-             <a class="nav-link u-header__nav-link" href="{% url 'blog:reptiles-lists' %}">爬虫</a>
-          </li>
-          {% if not request.user.is_anonymous %}
-          {% elif theme == 'index' %}
-              <li class="nav-item d-none d-md-inline-block pl-3 pr-0 ml-auto">
-                <a class="btn btn-sm btn-primary u-btn-primary transition-3d-hover" href="javascript:void(0)" role="button"
-                 aria-controls="sidebarContent"
-                 aria-haspopup="true"
-                 aria-expanded="false"
-                 data-unfold-event="click"
-                 data-unfold-hide-on-scroll="false"
-                 data-unfold-target="#sidebarContent"
-                 data-unfold-type="css-animation"
-                 data-unfold-animation-in="fadeInRight"
-                 data-unfold-animation-out="fadeOutRight"
-                 data-unfold-duration="500">
-                  登录
+                <a id="documentMegaMenu" class="nav-link u-header__nav-link" href="{% url 'blog:articles-list' %}"
+                   aria-haspopup="true" aria-expanded="false">
+                    发现
                 </a>
-              </li>
-          {% endif %}
-          <!-- End Button -->
-        </ul>
-      </div>
-      <!-- End Navigation -->
+            </li>
+            <li class="nav-item u-header__nav-item">
+                <a class="nav-link u-header__nav-link" href="{% url 'blog:topics' %}">专题</a></li>
+            <li class="nav-item u-header__nav-item">
+                <a class="nav-link u-header__nav-link" href="{% url 'blog:videos-lists' %}">视频</a></li>
+            <li class="nav-item u-header__nav-item">
+                <a class="nav-link u-header__nav-link" href="{% url 'blog:reptiles-lists' %}">爬虫</a>
+            </li>
+            {% if not request.user.is_anonymous %}
+            {% elif theme == 'index' %}
+                <li class="nav-item d-none d-md-inline-block pl-3 pr-0 ml-auto">
+                    <a class="btn btn-sm btn-primary u-btn-primary transition-3d-hover" href="javascript:void(0)"
+                       role="button"
+                       aria-controls="sidebarContent"
+                       aria-haspopup="true"
+                       aria-expanded="false"
+                       data-unfold-event="click"
+                       data-unfold-hide-on-scroll="false"
+                       data-unfold-target="#sidebarContent"
+                       data-unfold-type="css-animation"
+                       data-unfold-animation-in="fadeInRight"
+                       data-unfold-animation-out="fadeOutRight"
+                       data-unfold-duration="500">
+                        登录
+                    </a>
+                </li>
+            {% endif %}
+            <!-- End Button -->
+            </ul>
+        </div>
+        <!-- End Navigation -->
     </nav>
     <!-- End Nav -->
-  </div>
+</div>
 

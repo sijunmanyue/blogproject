@@ -1,30 +1,21 @@
 from django.urls import path, re_path
 
-from blog.views.account import account
-from blog.views.article import articles
-from blog.views.article import comment
-from blog.views.help import help
-from blog.views.index import index
-from blog.views.message import leave_messge
-from blog.views.upload import upload
-from blog.views.reptile import reptile
-from blog.views.tag import tag
+from blog.views import index, upload, article, comment, account, reptile, vedio, leave_messge, topic
 
 
 app_name = 'blog'
 
 urlpatterns = [
     path('', index.index, name='index'),
-    path('help/', help.help, name='help'),
     path('upload/', upload.upload, name='upload'),
 ]
 
 # Links about article
 urlpatterns += [
-    path('detail/<int:article_id>/', articles.get_article_by_id, name='article-detail'),
-    re_path(r'^articles/(?:page/(?P<page>\d+)/)?$', articles.lists, name='articles-list'),
-    re_path(r'^articles/tag/(?P<tag>\w+)/(?:page/(?P<page>\d+)/)?$', articles.get_articles_by_tag, name='articles-tag'),
-    re_path(r'^articles/(?P<cate>\w+)/(?:page/(?P<page>\d+)/)?$', articles.get_articles_by_category, name='articles-cate'),
+    path('detail/<int:article_id>/', article.get_article_by_id, name='article-detail'),
+    re_path(r'^articles/(?:page/(?P<page>\d+)/)?$', article.lists, name='articles-list'),
+    re_path(r'^articles/tag/(?P<tag>\w+)/(?:page/(?P<page>\d+)/)?$', article.get_articles_by_tag, name='articles-tag'),
+    re_path(r'^articles/(?P<cate>\w+)/(?:page/(?P<page>\d+)/)?$', article.get_articles_by_category, name='articles-cate'),
     path('comment/appreciate/', comment.comment_appreciate, name='comment-appreciate'),
     path('comment/dislike/', comment.comment_dislike, name='comment-dislike'),
     path('reply/dislike/', comment.reply_dislike, name='reply-dislike'),
@@ -51,6 +42,7 @@ urlpatterns += [
 urlpatterns += [
     path('message/', leave_messge.leave_message, name='message-leave'),
     path('reptiles/', reptile.lists, name='reptiles-lists'),
-    path('tags/', tag.lists, name='tags-lists'),
+    path('videos/', vedio.lists, name='videos-lists'),
+    path('topics/', topic.lists, name='topics'),
 ]
 

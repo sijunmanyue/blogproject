@@ -26,7 +26,7 @@
       <div class="w-lg-80 mx-auto">
         {% for reptile in reptiles %}
             <!-- Blog List News -->
-            {% if forloop.counter|divisibleby:4%}
+            {% if forloop.counter|divisibleby:4 %}
                 <!-- Blog Card -->
                 <article class="bg-primary rounded text-center shadow-primary-sm position-relative mb-7">
                   <a class="d-block u-space-2 px-7" href="{% url 'blog:article-detail' reptile.id %}">
@@ -57,7 +57,7 @@
                   <div class="col-sm-7">
                     <!-- Info -->
                     <div class="pt-1 pr-4">
-                      <small class="d-block text-muted mb-3">{{ reptile.creationTime|smart_timesince }}</small>
+                      <small class="d-block text-muted mb-3">{{ reptile.creationTime|date:'M j, Y' }}</small>
                       <div class="mb-7">
                         <h2 class="h5">
                           <a href="{% url 'blog:article-detail' reptile.id %}">{{ reptile.title }}</a>
@@ -75,28 +75,6 @@
 
         <div class="u-space-2-bottom"></div>
 
-{#        <!-- Pagination -->#}
-{#        <nav aria-label="Page navigation">#}
-{#          <ul class="pagination mb-0">#}
-{#            <li class="page-item ml-0">#}
-{#              <a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#" aria-label="Previous">#}
-{#                <span aria-hidden="true">«</span>#}
-{#                <span class="sr-only">Previous</span>#}
-{#              </a>#}
-{#            </li>#}
-{#            <li class="page-item active"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">1</a></li>#}
-{#            <li class="page-item"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">2</a></li>#}
-{#            <li class="page-item disabled"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">...</a></li>#}
-{#            <li class="page-item"><a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#">12</a></li>#}
-{#            <li class="page-item">#}
-{#              <a class="page-link" href="https://htmlstream.com/preview/front-v1.2/html/blog/list-full-width.html#" aria-label="Next">#}
-{#                <span aria-hidden="true">»</span>#}
-{#                <span class="sr-only">Next</span>#}
-{#              </a>#}
-{#            </li>#}
-{#          </ul>#}
-{#        </nav>#}
-{#        <!-- End Pagination -->#}
       </div>
     </div>
     <!-- End Blog List Section -->
@@ -169,7 +147,7 @@
               </clippath>
               <g style="clip-path:url(#phoneFrameID2);">
                 <!-- Apply your (282px width to 500px height) image here -->
-                <image style="overflow:visible;" width="282" height="500" xlink:href="../../assets/img/282x500/img3.jpg" transform="matrix(1 0 0 1 18 81)"></image>
+                <image style="overflow:visible;" width="282" height="500" xlink:href="{% static 'blog/images/282x500/img3.jpg' %}" transform="matrix(1 0 0 1 18 81)"></image>
               </g>
               <use class="u-fill-none u-stroke-light-blue-125" xlink:href="#phoneFrameID1" stroke-miterlimit="10" style="overflow: visible;"></use>
             </g>
@@ -197,19 +175,14 @@
   </main>
   <!-- ========== END MAIN ========== -->
 {% endblock %}
+{% block jsPlugins %}
+     <script src="{% static 'blog/js/hs.megamenu.js' %}"></script>
+     <script src="{% static 'blog/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+{% endblock %}
 {% block pageScripts %}
+
     <!-- JS Plugins Init. -->
   <script>
-    $(window).on('load', function () {
-      // initialization of HSMegaMenu component
-      $('.js-mega-menu').HSMegaMenu({
-        event: 'hover',
-        pageContainer: $('.container'),
-        breakpoint: 768,
-        hideTimeOut: 0
-      });
-    });
-
     $(document).on('ready', function () {
       // initialization of header
       $.HSCore.components.HSHeader.init($('#header'));

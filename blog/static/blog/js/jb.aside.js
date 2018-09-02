@@ -1,4 +1,3 @@
-
 $(function () {
     // 添加密码的规则校验
     $.validator.addMethod('password', function (value, element, params) {
